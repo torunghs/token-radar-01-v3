@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — which pre-token protocol is worth farming next</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1>Token Radar</h1>
+    <p class="sub">Every protocol that records no token yet, ranked by what its launch would be worth — and how to farm it. The value is fitted from the snapshot's own launched peers, tested held-out, and shown with its uncertainty.</p>
+    <div class="stats" id="stats"><span class="stat">Loading board…</span></div>
+  </div>
+</header>
+<main class="wrap">
+  <section class="panel modelbar" id="modelbar">
+    <p class="loading">Loading the fitted model…</p>
+  </section>
+
+  <section class="panel controls">
+    <div class="tabs" role="tablist">
+      <button id="tabBoard" class="tab active" role="tab">Pre-token radar</button>
+      <button id="tabLaunched" class="tab" role="tab">Already launched</button>
+      <button id="tabAudit" class="tab" role="tab">758 audit</button>
+    </div>
+    <div class="filters">
+      <input id="q" type="search" placeholder="Search name or slug…" aria-label="Search">
+      <select id="fCat" aria-label="Category"><option value="">All categories</option></select>
+      <select id="fChain" aria-label="Chain"><option value="">All chains</option></select>
+      <select id="fTvl" aria-label="Minimum TVL">
+        <option value="0">Any TVL</option>
+        <option value="50000000">TVL ≥ $50M</option>
+        <option value="100000000">TVL ≥ $100M</option>
+        <option value="500000000">TVL ≥ $500M</option>
+        <option value="1000000000">TVL ≥ $1B</option>
+      </select>
+      <select id="fVerdict" aria-label="Verdict">
+        <option value="">Any verdict</option>
+        <option value="Farm">Farm</option>
+        <option value="Farm small">Farm small</option>
+        <option value="Watch">Watch</option>
+      </select>
+      <select id="fSort" aria-label="Sort">
+        <option value="implied">Implied value ↓</option>
+        <option value="tvl">TVL ↓</option>
+        <option value="odds">Token odds ↓</option>
+        <option value="growth">7d change ↓</option>
+        <option value="age">Age ↓</option>
+        <option value="name">Name A–Z</option>
+      </select>
+    </div>
+    <p class="count" id="count"></p>
+  </section>
+
+  <div id="status" class="status">Loading board…</div>
+
+  <section id="boardView">
+    <table class="board">
+      <thead><tr>
+        <th data-sort="rank">Rank</th>
+        <th data-sort="name">Protocol</th>
+        <th data-sort="tvl">TVL</th>
+        <th data-sort="growth">7d</th>
+        <th data-sort="age">Age</th>
+        <th data-sort="implied">Implied value</th>
+        <th data-sort="odds">Token odds</th>
+        <th data-sort="verdict">Verdict</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </section>
+
+  <section id="launchedView" hidden>
+    <p class="banner">Already launched — not farmable; shown for reference so the radar separates them from pre-token protocols.</p>
+    <table class="board">
+      <thead><tr><th>Protocol</th><th>Category</th><th>TVL</th><th>Market cap</th><th>7d</th></tr></thead>
+      <tbody id="launchedRows"></tbody>
+    </table>
+  </section>
+
+  <section id="auditView" hidden>
+    <p class="banner">Every protocol in the snapshot is accounted for exactly once: ranked, excluded with a reason, or already launched.</p>
+    <div id="auditSummary"></div>
+    <h3>Pre-token, not ranked — why</h3>
+    <p class="fine">These protocols record no token, but their token — if any — would belong to an asset that already trades: an exchange's own product, a wrapped or staked product, a bridge, or a versioned name. They are not launches waiting to happen.</p>
+    <table class="board">
+      <thead><tr><th>Protocol</th><th>Category</th><th>TVL</th><th>Reason</th></tr></thead>
+      <tbody id="excludedRows"></tbody>
+    </table>
+  </section>
+
+  <section class="panel method" id="method">
+    <h2>How the value is worked out — and how it was tested</h2>
+    <div id="methodBody"><p class="loading">Loading the method…</p></div>
+  </section>
+
+  <p class="fine foot" id="foot"></p>
+</main>
+
+<div id="modal" class="modal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <button id="modalClose" class="close" aria-label="Close">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
